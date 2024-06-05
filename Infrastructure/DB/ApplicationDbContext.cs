@@ -1,4 +1,6 @@
-﻿using Domain.RoleEntity;
+﻿using Domain.AuthorEntity;
+using Domain.BookEntity;
+using Domain.RoleEntity;
 using Domain.UserEntity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -75,4 +77,6 @@ public class ApplicationDbContext : IdentityDbContext<User, ApplicationRole, str
             });
     }
     public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<Author> Authors{ get; set; }
+    public virtual DbSet<Book> Books{ get; set; }
 }

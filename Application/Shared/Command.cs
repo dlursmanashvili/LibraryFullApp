@@ -1,4 +1,6 @@
-﻿using Domain.RoleEntity.IRepository;
+﻿using Domain.AuthorEntity.IRepository;
+using Domain.BookEntity.IBookRepository;
+using Domain.RoleEntity.IRepository;
 using Domain.UserEntity;
 using Domain.UserEntity.IRepository;
 using Infrastructure.DB;
@@ -17,6 +19,8 @@ public abstract class Command : ResponseHelper
     protected IConfiguration Configuration;
     protected IRoleRepository RoleRepository;
     protected IUserRepository userRepository;
+    protected IAuthorRepository authorRepository;
+    protected IBookRepository bookRepository;
 
     public abstract Task<CommandExecutionResult> ExecuteAsync();
 
@@ -38,6 +42,8 @@ public abstract class Command : ResponseHelper
             UserId = user.Claims.First(i => i.Type == "UserId").Value;
         }
         userRepository = serviceProvider.GetService<IUserRepository>();
+        authorRepository = serviceProvider.GetService<IAuthorRepository>();
+        bookRepository = serviceProvider.GetService<IBookRepository>();
 
 
     }

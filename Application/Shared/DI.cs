@@ -1,4 +1,6 @@
 ﻿
+using Domain.AuthorEntity.IRepository;
+using Domain.BookEntity.IBookRepository;
 using Domain.MailModel.IRepository;
 using Domain.RoleEntity;
 using Domain.RoleEntity.IRepository;
@@ -18,13 +20,12 @@ public static class DI
         services.AddIdentity<User, ApplicationRole>()
               .AddEntityFrameworkStores<ApplicationDbContext>()
               .AddDefaultTokenProviders();
-
-
         services.AddScoped<IQueryExecutor, QueryExecutor>();
         services.AddScoped<ICommandExecutor, CommandExecutor>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ISendNotification, SendNotification>();
-
+        services.AddScoped<IAuthorRepository, AuthorRepository>();
+        services.AddScoped<IBookRepository, BookRepository>();
     }
 }

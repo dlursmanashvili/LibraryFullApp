@@ -25,16 +25,16 @@ public class UserController : ControllerBase
     }
 
     #region Queries
-   
+
     [Authorize(Roles = UserGroups.Admin)]
     [Route("GetUsersByName")]
     [HttpGet]
     public async Task<QueryExecutionResult<GetAllUserQueryResult>> GetUsersByName([FromQuery] GetUsersByNameQeuery query) =>
          await _queryExecutor.Execute<GetUsersByNameQeuery, GetAllUserQueryResult>(query);
 
-   
 
-    [Authorize]
+
+    [AuthoriseHelper(UserGroups.Admin)]
     [Route("GetOneUserByID")]
     [HttpGet]
     public async Task<QueryExecutionResult<GetOneUserByIDQueryResult>> GetOneUserByID([FromQuery] GetOneUserByIDQuery query) =>
@@ -56,32 +56,32 @@ public class UserController : ControllerBase
          await _commandExecutor.Execute(command);
 
 
-    [Route("ForgetPassword")]
-    [HttpPost]
-    public async Task<CommandExecutionResult> ResetPassword([FromBody] ForgetPasswordCommand command) =>
-       await _commandExecutor.Execute(command);
+    //[Route("ForgetPassword")]
+    //[HttpPost]
+    //public async Task<CommandExecutionResult> ResetPassword([FromBody] ForgetPasswordCommand command) =>
+    //   await _commandExecutor.Execute(command);
 
-    [Route("ResetPassword")]
-    [HttpPost]
-    public async Task<CommandExecutionResult> ResetPassword([FromBody] ResetPasswordCommand command) =>
-            await _commandExecutor.Execute(command);
+    //[Route("ResetPassword")]
+    //[HttpPost]
+    //public async Task<CommandExecutionResult> ResetPassword([FromBody] ResetPasswordCommand command) =>
+    //        await _commandExecutor.Execute(command);
 
-    [Route("activatenewuser")]
-    [HttpPost]
-    public async Task<CommandExecutionResult> activatenewuser([FromBody] ActivateNewUserCommand command) =>
-            await _commandExecutor.Execute(command);
+    //[Route("activatenewuser")]
+    //[HttpPost]
+    //public async Task<CommandExecutionResult> activatenewuser([FromBody] ActivateNewUserCommand command) =>
+    //        await _commandExecutor.Execute(command);
 
-    [Route("ResetPasswordByAdmin")]
-    [HttpPost]
-    [AuthoriseHelper("RootAdmin")]
-    public async Task<CommandExecutionResult> ResetPasswordByAdmin([FromBody] ResetPasswordByAdmin command) =>
-            await _commandExecutor.Execute(command);
+    //[Route("ResetPasswordByAdmin")]
+    //[HttpPost]
+    //[AuthoriseHelper("RootAdmin")]
+    //public async Task<CommandExecutionResult> ResetPasswordByAdmin([FromBody] ResetPasswordByAdmin command) =>
+    //        await _commandExecutor.Execute(command);
 
-    [Route("ForgetPasswordByAdmin")]
-    [HttpPost]
-    [AuthoriseHelper("RootAdmin")]
-    public async Task<CommandExecutionResult> ForgetPasswordByAdmin([FromBody] ForgetPasswordByAdminCommand command) =>
-       await _commandExecutor.Execute(command);
+    //[Route("ForgetPasswordByAdmin")]
+    //[HttpPost]
+    //[AuthoriseHelper("RootAdmin")]
+    //public async Task<CommandExecutionResult> ForgetPasswordByAdmin([FromBody] ForgetPasswordByAdminCommand command) =>
+    //   await _commandExecutor.Execute(command);
 
     [Route("RegistrationByAdmin")]
     [HttpPost]

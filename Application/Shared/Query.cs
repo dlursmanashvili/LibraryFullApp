@@ -1,4 +1,6 @@
-﻿using Domain.RoleEntity.IRepository;
+﻿using Domain.AuthorEntity.IRepository;
+using Domain.BookEntity.IBookRepository;
+using Domain.RoleEntity.IRepository;
 using Domain.UserEntity;
 using Domain.UserEntity.IRepository;
 using Infrastructure.DB;
@@ -16,6 +18,8 @@ public abstract class Query<TQueryResult> where TQueryResult : class
     protected UserManager<User> _userManager;
     protected IRoleRepository RoleRepository;
     protected IUserRepository userRepository;
+    protected IAuthorRepository authorRepository;
+    protected IBookRepository bookRepository;
 
     protected string? UserId;
     protected string? Username;
@@ -41,6 +45,8 @@ public abstract class Query<TQueryResult> where TQueryResult : class
         }
 
         userRepository = serviceProvider.GetService<IUserRepository>();
+        authorRepository = serviceProvider.GetService<IAuthorRepository>();
+        bookRepository = serviceProvider.GetService<IBookRepository>();
 
     }
 
