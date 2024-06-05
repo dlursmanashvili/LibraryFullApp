@@ -218,6 +218,10 @@ public class UserRepository : BaseRepository, IUserRepository
             {
                 var mailSendResult = await this.DeactiveNewUserAsync(user);
             }
+            else
+            {
+                user.IsActive = true;
+            }
 
 
             return new CommandExecutionResult() { Success = true };

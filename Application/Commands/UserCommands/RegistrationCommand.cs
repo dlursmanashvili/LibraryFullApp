@@ -32,7 +32,7 @@ namespace Application.Commands.UserCommands
                 LastName = LastName,
                 PhoneNumber = Phone,
                 IsOorganisation = IsOorganisation,
-            }, "user", true);
+            }, "user", false);
         }
 
 
