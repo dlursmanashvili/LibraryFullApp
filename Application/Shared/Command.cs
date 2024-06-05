@@ -1,5 +1,6 @@
 ﻿using Domain.AuthorEntity.IRepository;
 using Domain.BookEntity.IBookRepository;
+using Domain.Entities.FileEntity.IRepository;
 using Domain.RoleEntity.IRepository;
 using Domain.UserEntity;
 using Domain.UserEntity.IRepository;
@@ -21,6 +22,7 @@ public abstract class Command : ResponseHelper
     protected IUserRepository userRepository;
     protected IAuthorRepository authorRepository;
     protected IBookRepository bookRepository;
+    protected IFileClassRepository fileClassRepository;
 
     public abstract Task<CommandExecutionResult> ExecuteAsync();
 
@@ -44,6 +46,7 @@ public abstract class Command : ResponseHelper
         userRepository = serviceProvider.GetService<IUserRepository>();
         authorRepository = serviceProvider.GetService<IAuthorRepository>();
         bookRepository = serviceProvider.GetService<IBookRepository>();
+        fileClassRepository = serviceProvider.GetService<IFileClassRepository>();
 
 
     }
