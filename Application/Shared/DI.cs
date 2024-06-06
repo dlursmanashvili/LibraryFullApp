@@ -1,5 +1,6 @@
 ﻿
 using Domain.AuthorEntity.IRepository;
+using Domain.BookAuthorEntity.IRepository;
 using Domain.BookEntity.IBookRepository;
 using Domain.Entities.FileEntity.IRepository;
 using Domain.MailModel.IRepository;
@@ -28,6 +29,7 @@ public static class DI
         services.AddScoped<ISendNotification, SendNotification>();
         services.AddScoped<IAuthorRepository, AuthorRepository>();
         services.AddScoped<IBookRepository, BookRepository>();
+        services.AddScoped<IBookAuthorRepository, BookAuthorRepository>();
         services.AddScoped<IFileClassRepository, FileClassRepository>();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Domain.AuthorEntity;
+using Domain.BookAuthorEntity;
 using Domain.BookEntity;
 using Domain.RoleEntity;
 using Domain.UserEntity;
@@ -79,4 +80,5 @@ public class ApplicationDbContext : IdentityDbContext<User, ApplicationRole, str
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<Author> Authors{ get; set; }
     public virtual DbSet<Book> Books{ get; set; }
+    public virtual DbSet<BookAuthor> BookAuthors{ get; set; }
 }
