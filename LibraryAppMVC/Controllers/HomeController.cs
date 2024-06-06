@@ -15,7 +15,7 @@ namespace LibraryAppMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Login", "User");  // Replace with desired action
         }
 
         public IActionResult Privacy()
