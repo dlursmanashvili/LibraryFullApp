@@ -38,9 +38,9 @@ public abstract class Command : ResponseHelper
         Configuration = configuration;
         applicationDbContext = applicationContext;
 
-        var user = ServiceProvider.GetService<IHttpContextAccessor>().HttpContext.User;
+        var user = ServiceProvider.GetService<IHttpContextAccessor>()?.HttpContext?.User;
 
-        if (user.Claims.Any())
+        if (user.IsNotNull() && user.Claims.Any())
         {
             Username = user.Claims.First(i => i.Type == "UserName").Value;
             UserId = user.Claims.First(i => i.Type == "UserId").Value;

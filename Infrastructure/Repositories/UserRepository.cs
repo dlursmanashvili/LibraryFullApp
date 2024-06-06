@@ -165,18 +165,19 @@ public class UserRepository : BaseRepository, IUserRepository
     }
 
     public async Task<CommandExecutionResult> Registration(User user, string RoleName, bool SendMailSetting)
-    {
+    {try
+        {
         if (user == null)
         {
             return new CommandExecutionResult() { Success = false, ErrorMessage = "Invalid user object" };
         }
 
-        if (_ApplicationDbContext.Users.FirstOrDefault(x => x.IsActive && (x.Email == user.Email || x.UserName == user.UserName)).IsNotNull())
-        {
-            return new CommandExecutionResult() { Success = false, ErrorMessage = "მომხმარებლის სახელი უკვე დაკავებულია" };
-        }
+            if (_ApplicationDbContext.Users.FirstOrDefault(x => x.IsActive && (x.Email == user.Email || x.UserName == user.UserName)).IsNotNull())
+            {
+                return new CommandExecutionResult() { Success = false, ErrorMessage = "მომხმარებლის სახელი უკვე დაკავებულია" };
+            }
 
-        if (await _userManager.FindByEmailAsync(user.Email) != null)
+            if (await _userManager.FindByEmailAsync(user.Email) != null)
         {
             return new CommandExecutionResult() { Success = false, ErrorMessage = $"მომხმარებლის მეილი {user.Email} უკვე დაკავებულია" };
         }
@@ -186,8 +187,7 @@ public class UserRepository : BaseRepository, IUserRepository
             return new CommandExecutionResult() { Success = false, ErrorMessage = "Invalid Role Name" };
         }
 
-        try
-        {
+        
             if (_userManager == null)
             {
                 return new CommandExecutionResult() { Success = false, ErrorMessage = "User Manager is not initialized" };

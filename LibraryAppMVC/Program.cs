@@ -1,12 +1,20 @@
 using Application.Shared;
 using Infrastructure.DB;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ApplicationDbContext>(); // Replace with your actual DbContext class
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+
+builder.Services.AddDbContext<ApplicationDbContext>();
+DI.DependecyResolver(builder.Services);
+// Replace with your actual DbContext class
 builder.Services.AddScoped<ICommandExecutor, CommandExecutor>();
 
 var app = builder.Build();
