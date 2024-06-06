@@ -10,7 +10,6 @@ public class EditBookCommand : Command
     public string Title { get; set; }
     public int Id { get; set; }
     public string? Description { get; set; }
-    public string? AuthorId { get; set; }
     public string PathImg { get; set; }
     public int Rating { get; set; }
     public DateTime PublishDate { get; set; }
@@ -39,7 +38,6 @@ public class EditBookCommand : Command
         {
             Id = Id,
             Title = Title,
-            AuthorId = AuthorId,
             Description = Description,
             BookStatus = BookStatus,
             PublishDate = PublishDate,

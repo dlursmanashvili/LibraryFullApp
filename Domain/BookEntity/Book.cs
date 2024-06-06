@@ -9,7 +9,6 @@ public class Book : BaseEntity<int>
 
     [MaxLength(500)]
     public string? Description { get; set; }
-    public string? AuthorId { get; set; }
     public string PathImg { get; set; }
     public int Rating { get; set; }
     public DateTime PublishDate { get; set; }

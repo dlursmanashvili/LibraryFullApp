@@ -12,7 +12,6 @@ public class AddBookCommand : Command
 
     [MaxLength(500)]
     public string? Description { get; set; }
-    public string? AuthorId { get; set; }
     public string PathImg { get; set; }
     public int Rating { get; set; }
     public DateTime PublishDate { get; set; }
@@ -45,7 +44,6 @@ public class AddBookCommand : Command
         return await bookRepository.CreateAsync(new Domain.BookEntity.Book()
         {
             Title = Title,
-            AuthorId = AuthorId,
             Description = Description,
             BookStatus = BookStatus,
             PublishDate = PublishDate,

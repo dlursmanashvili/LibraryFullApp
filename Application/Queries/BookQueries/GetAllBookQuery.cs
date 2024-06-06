@@ -17,7 +17,6 @@ public class GetAllBookQuery : Query<List<GetBookQueryResultItem>?>
                 Id = x.Id,
                Title = x.Title,
                Rating = x.Rating,
-               AuthorId = x.AuthorId,
                PublishDate = x.PublishDate,
                PathImg = x.PathImg,
                Description = x.Description,
@@ -32,7 +31,6 @@ public class GetBookQueryResultItem
     public string Title { get; set; }
     public int Id { get; set; }
     public string? Description { get; set; }
-    public string? AuthorId { get; set; }
     public string PathImg { get; set; }
     public int Rating { get; set; }
     public DateTime PublishDate { get; set; }
