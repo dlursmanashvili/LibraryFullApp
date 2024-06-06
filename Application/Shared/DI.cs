@@ -31,5 +31,6 @@ public static class DI
         services.AddScoped<IBookRepository, BookRepository>();
         services.AddScoped<IBookAuthorRepository, BookAuthorRepository>();
         services.AddScoped<IFileClassRepository, FileClassRepository>();
+
     }
 }
