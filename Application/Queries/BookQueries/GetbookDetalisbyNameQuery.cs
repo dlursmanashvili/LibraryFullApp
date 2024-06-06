@@ -15,7 +15,7 @@ public class GetbookDetalisbyNameQuery : Query<List<GetbookDetalisQueryResultIte
         {
 
 
-            var result = await (from b in query                                
+            var result = await (from b in query
                                 select new GetbookDetalisQueryResultItem
                                 {
                                     Id = b.Id,

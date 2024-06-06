@@ -52,6 +52,12 @@ namespace Interface.Controllers
         public async Task<QueryExecutionResult<GetBookQueryResultItem?>> GetBookByID([FromQuery] GetByIdBookQuery query) =>
              await _queryExecutor.Execute<GetByIdBookQuery, GetBookQueryResultItem?>(query);
 
+
+        [AuthoriseHelper(UserGroups.All)]
+        [Route("GetbookDetalisbyName")]
+        [HttpGet]
+        public async Task<QueryExecutionResult<List<GetbookDetalisQueryResultItem>?>> GetbookDetalisbyName([FromQuery] GetbookDetalisbyNameQuery query) =>
+           await _queryExecutor.Execute<GetbookDetalisbyNameQuery, List<GetbookDetalisQueryResultItem>?>(query);
         #endregion
     }
 }

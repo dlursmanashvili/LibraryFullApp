@@ -4,11 +4,11 @@ using Shared;
 
 namespace Application.Queries.AutrhorQueries;
 
-public class GetAuthorDetalisByNameQuery : Query<List<GetAuthorDetalisQueryResultItem>>
+public class GetAuthorDetalisByNameQuery : Query<List<GetAuthorDetalisQueryResultItem>?>
 {
     public string FirstName { get; set; }
 
-    public override async Task<QueryExecutionResult<List<GetAuthorDetalisQueryResultItem>>> Execute()
+    public override async Task<QueryExecutionResult<List<GetAuthorDetalisQueryResultItem>?>> Execute()
     {
         var query = _appContext.Authors.Where(x => x.IsDeleted == false && x.FirstName == FirstName).AsQueryable();
         if (query.Any())
