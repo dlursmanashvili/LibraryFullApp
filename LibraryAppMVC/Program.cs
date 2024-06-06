@@ -16,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>();
 DI.DependecyResolver(builder.Services);
 // Replace with your actual DbContext class
 builder.Services.AddScoped<ICommandExecutor, CommandExecutor>();
+builder.Services.AddScoped<IQueryExecutor, QueryExecutor>();
 
 var app = builder.Build();
 
