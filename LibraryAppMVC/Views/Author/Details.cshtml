@@ -1,0 +1,42 @@
+﻿ @model LibraryAppMVC.Models.AuthorDetalisVievModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Model.FirstName @Model.LastName - Author Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1 class="card-title">@Model.FirstName @Model.LastName</h1>
+                <p class="card-text"><strong>Birth Date:</strong> @Model.BirthDate.ToString("d MMM yyyy")</p>
+
+                <h2 class="mt-4">Books</h2>
+                <div class="list-group">
+                    @foreach (var book in Model.bookDetails)
+                    {
+                        <div class="list-group-item flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">@book.Title</h5>
+                                <small>@book.PublishDate.ToString("d MMM yyyy")</small>
+                            </div>
+                            <p class="mb-1">@book.Description</p>
+                            <small><strong>Rating:</strong> @book.Rating | <strong>Available in Library:</strong> @book.BookinLibrary</small>
+                            <img src="@book.PathImg" alt="Book Image" class="img-fluid mt-3" style="max-height: 200px;" />
+                        </div>
+                    }
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="mt-4">
+                    <a href="@Url.Action("Edit", "Author", new { id = Model.Id })" class="btn btn-primary">Edit</a>
+                    <a href="@Url.Action("Delete", "Author", new { id = Model.Id })" class="btn btn-danger">Delete</a>
+                    <a href="@Url.Action("Index", "Author")" class="btn btn-secondary">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

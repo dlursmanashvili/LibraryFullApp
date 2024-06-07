@@ -1,4 +1,5 @@
 ﻿using Application.Commands.AuthorCommands;
+using Application.Queries.AutrhorQueries;
 using Application.Queries.BookQueries;
 using Application.Shared;
 using Microsoft.AspNetCore.Mvc;
@@ -57,6 +58,13 @@ namespace Interface.Controllers
         [HttpGet]
         public async Task<QueryExecutionResult<List<GetbookDetalisQueryResultItem>?>> GetbookDetalisbyName([FromQuery] GetbookDetalisbyNameQuery query) =>
            await _queryExecutor.Execute<GetbookDetalisbyNameQuery, List<GetbookDetalisQueryResultItem>?>(query);
+
+
+        [AuthoriseHelper(UserGroups.All)]
+        [Route("GetOneAuthorBooksByAuthorID")]
+        [HttpGet]
+        public async Task<QueryExecutionResult<GetAuthorDetalisQueryResultItem?>> GetOneAuthorBooksByAuthorID([FromQuery] GetOneAuthorBooksByAuthorIDQuery query) =>
+           await _queryExecutor.Execute<GetOneAuthorBooksByAuthorIDQuery, GetAuthorDetalisQueryResultItem?>(query);
         #endregion
     }
 }

@@ -47,8 +47,8 @@ namespace LibraryAppMVC.Controllers
         [HttpGet("details/{id}")]
         public async Task<ActionResult> Details(int id)
         {
-            var query = new GetbookDetalisById { BookId = id };
-            var result = await _queryExecutor.Execute<GetbookDetalisById, GetbookDetalisQueryResultItem?>(query);
+            var query = new GetOnebookAuthorsInfoQuery { BookId = id };
+            var result = await _queryExecutor.Execute<GetOnebookAuthorsInfoQuery, GetbookDetalisQueryResultItem?>(query);
 
             if (result.Success && result.Data != null)
             {

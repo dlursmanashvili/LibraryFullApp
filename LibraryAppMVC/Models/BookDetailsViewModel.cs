@@ -10,7 +10,7 @@ public class BookDetailsViewModel
     public int Rating { get; set; }
     public DateTime PublishDate { get; set; }
     public bool BookinLibrary { get; set; }
-    public List<AuthorDetailsViewModel> AuthorDetails { get; set; }
+    public List<AuthorDetailsViewModel>? AuthorDetails { get; set; }
 }
 
 public class AuthorDetailsViewModel

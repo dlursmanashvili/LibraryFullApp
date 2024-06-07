@@ -4,7 +4,7 @@ using Shared;
 
 namespace Application.Queries.AutrhorQueries;
 
-public class GetbookDetalisById : Query<GetbookDetalisQueryResultItem?>
+public class GetOnebookAuthorsInfoQuery : Query<GetbookDetalisQueryResultItem?>
 {
     public int BookId { get; set; }
     public override async Task<QueryExecutionResult<GetbookDetalisQueryResultItem?>> Execute()
