@@ -57,5 +57,11 @@ public class Autrhorcontroller : ControllerBase
     public async Task<QueryExecutionResult<List<GetAuthorDetalisQueryResultItem>?>> GetAuthorDetalisByAuthorName([FromQuery] GetAuthorDetalisByNameQuery query) =>
         await _queryExecutor.Execute<GetAuthorDetalisByNameQuery, List<GetAuthorDetalisQueryResultItem>?>(query);
 
+
+    [AuthoriseHelper(UserGroups.All)]
+    [Route("GetAuthorByBookId")]
+    [HttpGet]
+    public async Task<QueryExecutionResult<List<GetAuthorQueryResultItem>?>> GetAuthorByBookId([FromQuery] GetAuthorByBookIdQuery query) =>
+        await _queryExecutor.Execute<GetAuthorByBookIdQuery, List<GetAuthorQueryResultItem>?>(query);
     #endregion
 }

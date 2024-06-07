@@ -1,10 +1,7 @@
 ﻿using Application.Commands.UserCommands;
 using Application.Queries.UserQuery;
 using Application.Shared;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Shared;
-using System.Threading.Tasks;
 using static Application.Queries.UserQuery.LoginQuery;
 
 namespace LibraryAppMVC.Controllers
@@ -62,7 +59,7 @@ namespace LibraryAppMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginQuery query)
         {
-            if (query.Email == null &&query.Password == null) // Handle potential null query object
+            if (query.Email == null && query.Password == null) // Handle potential null query object
             {
                 return View(); // Return login view (replace with appropriate action)
             }
