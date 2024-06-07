@@ -20,7 +20,7 @@ public class AddBookCommand : Command
     public override async Task<CommandExecutionResult> ExecuteAsync()
     {
 
-        if (File.ext.IsNotNull() && File.base64String.IsNotNull())
+        if (File.IsNotNull() && File.ext.IsNotNull() && File.base64String.IsNotNull())
         {
             var fileResult = await fileClassRepository.SaveFileLocal(
                      "Files/",

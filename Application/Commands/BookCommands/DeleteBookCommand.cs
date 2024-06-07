@@ -5,7 +5,7 @@ namespace Application.Commands.AuthorCommands;
 
 public class DeleteBookCommand : Command
 {
-    public int Id { get; private set; }
+    public int Id { get;  set; }
 
     public override async Task<CommandExecutionResult> ExecuteAsync()
     {

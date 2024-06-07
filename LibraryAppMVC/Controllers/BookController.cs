@@ -5,6 +5,7 @@ using Application.Shared;
 using Domain.Entities.FileEntity;
 using LibraryAppMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace LibraryAppMVC.Controllers
 {
@@ -149,23 +150,32 @@ namespace LibraryAppMVC.Controllers
 
         // GET: book/delete/{id}
         [HttpGet("delete/{id}")]
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: book/delete/{id}
-        [HttpPost("delete/{id}")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                return RedirectToAction(nameof(IndexAsync));
+                var command = new DeleteBookCommand() { Id = id }; // Create a DeleteBookCommand with the provided book ID
+
+                var result = await _commandExecutor.Execute(command);
+
+                if (result.Success)
+                {
+                    return RedirectToAction("Index", "Book");
+                }
+                else
+                {
+                    // Handle the case where the deletion was not successful
+                    ModelState.AddModelError(string.Empty, result.ErrorMessage);
+                    // Redirect to the delete view to display error messages
+                    return RedirectToAction("Delete", "Book", new { id });
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                // Handle any exceptions that occur during the deletion process
+                ModelState.AddModelError(string.Empty, ex.Message);
+                // Redirect to the delete view to display error messages
+                return RedirectToAction("Delete", "Book", new { id });
             }
         }
     }
