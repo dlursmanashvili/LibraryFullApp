@@ -16,7 +16,7 @@ public class GetByIdBookQuery : Query<GetBookQueryResultItem?>
             return await Ok(new GetBookQueryResultItem()
             {
                 Id = result.Id,
-                BookStatus = result.BookStatus,
+                BookinLibrary = result.BookinLibrary,
                 Description = result.Description,
                 PathImg = result.PathImg,
                 PublishDate = result.PublishDate,

@@ -1,5 +1,4 @@
 ﻿using Application.Shared;
-using Domain.BookEntity;
 using Domain.Entities.FileEntity;
 using Shared;
 using System.ComponentModel.DataAnnotations;
@@ -12,42 +11,49 @@ public class AddBookCommand : Command
 
     [MaxLength(500)]
     public string? Description { get; set; }
-    public string PathImg { get; set; }
+    //public string PathImg { get; set; }
     public int Rating { get; set; }
     public DateTime PublishDate { get; set; }
-    public int BookStatus { get; set; } = 1;
-    public FileClass File { get; set; }
+    public bool BookinLibrary { get; set; } = true;
+    public FileClass? File { get; set; }
 
     public override async Task<CommandExecutionResult> ExecuteAsync()
     {
-        if (!Enum.IsDefined(typeof(BookStatusEnum), BookStatus))
+
+        if (File.ext.IsNotNull() && File.base64String.IsNotNull())
         {
-            return new CommandExecutionResult
+            var fileResult = await fileClassRepository.SaveFileLocal(
+                     "Files/",
+                     "\\Files\\",
+                     "BookFiles",
+                     File.base64String,
+                     "BookFiles",
+                     File.ext);
+
+            if (fileResult.result.Success == false)
             {
-                Success = false,
-                ErrorMessage = "Invalid book status."
-            };
+                return fileResult.result;
+            }
+
+            return await bookRepository.CreateAsync(new Domain.BookEntity.Book()
+            {
+                Title = Title,
+                Description = Description,
+                BookinLibrary = BookinLibrary,
+                PublishDate = PublishDate,
+                PathImg = fileResult.filePath,
+                Rating = Rating,
+                CreatedAt = DateTime.Now,
+            });
         }
 
-        var fileResult = await fileClassRepository.SaveFileLocal(
-          "Files/",
-          "\\Files\\",
-          "BookFiles",
-          File.base64String,
-          "BookFiles",
-          File.ext);
-
-        if (fileResult.result.Success == false)
-        {
-            return fileResult.result;
-        }
         return await bookRepository.CreateAsync(new Domain.BookEntity.Book()
         {
             Title = Title,
             Description = Description,
-            BookStatus = BookStatus,
+            BookinLibrary = BookinLibrary,
             PublishDate = PublishDate,
-            PathImg = fileResult.filePath,
+            PathImg = null,
             Rating = Rating,
             CreatedAt = DateTime.Now,
         });

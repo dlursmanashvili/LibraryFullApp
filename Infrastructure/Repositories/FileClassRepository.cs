@@ -57,6 +57,10 @@ namespace Infrastructure.Repositories
                     ?? throw new Exception("_hostingEnvironment full name is null"),
                     folderName);
 
+                if (ext.Contains('.'))
+                {
+                    ext = ext.TrimStart('.');
+                }
                 // Validate file extension
                 if (ext != "png" && ext != "jpg")
                 {

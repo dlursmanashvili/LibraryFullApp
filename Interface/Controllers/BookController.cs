@@ -1,5 +1,4 @@
 ﻿using Application.Commands.AuthorCommands;
-using Application.Queries.AutrhorQueries;
 using Application.Queries.BookQueries;
 using Application.Shared;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +38,7 @@ namespace Interface.Controllers
         await _commandExecutor.Execute(command);
 
         #region Queries
-        [AuthoriseHelper(UserGroups.All)]
+        //[AuthoriseHelper(UserGroups.All)]
         [Route("GetAllBook")]
         [HttpGet]
         public async Task<QueryExecutionResult<List<GetBookQueryResultItem>?>> GetAllBook([FromQuery] GetAllBookQuery query) =>

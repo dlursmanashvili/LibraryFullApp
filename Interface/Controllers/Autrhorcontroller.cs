@@ -1,5 +1,6 @@
 ﻿using Application.Commands.AutrhorCommands;
 using Application.Queries.AutrhorQueries;
+using Application.Queries.BookQueries;
 using Application.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Shared;
@@ -23,7 +24,7 @@ public class Autrhorcontroller : ControllerBase
     [HttpPost]
     public async Task<CommandExecutionResult> AddNewAuthor([FromBody] AddAutrhorCommand command) =>
        await _commandExecutor.Execute(command);
-   
+
     [AuthoriseHelper(UserGroups.Admin)]
     [Route("EditAuthor")]
     [HttpPut]
@@ -61,7 +62,7 @@ public class Autrhorcontroller : ControllerBase
     [AuthoriseHelper(UserGroups.All)]
     [Route("GetAuthorByBookId")]
     [HttpGet]
-    public async Task<QueryExecutionResult<List<GetAuthorQueryResultItem>?>> GetAuthorByBookId([FromQuery] GetAuthorByBookIdQuery query) =>
-        await _queryExecutor.Execute<GetAuthorByBookIdQuery, List<GetAuthorQueryResultItem>?>(query);
+    public async Task<QueryExecutionResult<GetbookDetalisQueryResultItem?>> GetAuthorByBookId([FromQuery] GetbookDetalisById query) =>
+        await _queryExecutor.Execute<GetbookDetalisById, GetbookDetalisQueryResultItem?>(query);
     #endregion
 }

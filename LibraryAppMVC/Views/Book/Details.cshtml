@@ -1,0 +1,89 @@
+﻿@* @model BookDetailsViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Model.Title - Book Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- You can replace the above link with a local copy of Bootstrap if you have one -->
+</head>
+<body>
+    <div class="container">
+        <h1>@Model.Title</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <img src="@Model.PathImg" alt="Book Image" class="img-fluid" />
+            </div>
+            <div class="col-md-6">
+                <p><strong>Description:</strong> @Model.Description</p>
+                <p><strong>Rating:</strong> @Model.Rating</p>
+                <p><strong>Publish Date:</strong> @Model.PublishDate</p>
+                <p><strong>Available in Library:</strong> @Model.BookinLibrary</p>
+            </div>
+        </div>
+
+        <h2>Authors</h2>
+        <ul class="list-group">
+            @foreach (var author in Model.AuthorDetails)
+            {
+                <li class="list-group-item">
+                    <strong>@author.FirstName @author.LastName</strong> - @author.BirthDate
+                </li>
+            }
+        </ul>
+
+        <a href="#" class="btn btn-primary">Edit</a>
+        <a href="#" class="btn btn-danger">Delete</a>
+        <!-- Replace "#" with the appropriate URLs for the Edit and Delete actions -->
+    </div>
+</body>
+</html>
+ *@
+
+
+            @model BookDetailsViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Model.Title - Book Details</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- You can replace the above link with a local copy of Bootstrap if you have one -->
+</head>
+<body>
+    <div class="container">
+        <h1>@Model.Title</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <img src="@Model.PathImg" alt="Book Image" class="img-fluid" />
+            </div>
+            <div class="col-md-6">
+                <p><strong>Description:</strong> @Model.Description</p>
+                <p><strong>Rating:</strong> @Model.Rating</p>
+                <p><strong>Publish Date:</strong> @Model.PublishDate</p>
+                <p><strong>Available in Library:</strong> @Model.BookinLibrary</p>
+            </div>
+        </div>
+
+        <h2>Authors</h2>
+        <ul class="list-group">
+            @foreach (var author in Model.AuthorDetails)
+            {
+                <li class="list-group-item">
+                    <strong>@author.FirstName @author.LastName</strong> - @author.BirthDate
+                </li>
+            }
+        </ul>
+
+        <!-- Edit button -->
+        <a href="@Url.Action("Edit", "Book", new { id = Model.Id })" class="btn btn-primary">Edit</a>
+
+        <!-- Delete button (with confirmation) -->
+        <form method="post" action="@Url.Action("Delete", "Book", new { id = Model.Id })" onsubmit="return confirm('Are you sure you want to delete this book?');">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</body>
+</html>

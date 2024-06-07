@@ -69,7 +69,7 @@ namespace LibraryAppMVC.Controllers
             if (loginResult.Success)
             {
                 // Login successful (redirect to protected area, store token)
-                return RedirectToAction("Index", "Home");  // Replace with desired action
+                return RedirectToAction("Index", "Book");  // Replace with desired action
             }
             else
             {

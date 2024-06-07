@@ -26,7 +26,7 @@ public class GetAuthorDetalisByNameQuery : Query<List<GetAuthorDetalisQueryResul
                                              select new BookDetalisResultItem
                                              {
                                                  Id = book.Id,
-                                                 BookStatus = book.BookStatus,
+                                                 BookinLibrary = book.BookinLibrary,
                                                  Description = book.Description,
                                                  PathImg = book.PathImg,
                                                  PublishDate = book.PublishDate,
@@ -54,8 +54,8 @@ public class BookDetalisResultItem
     public int Id { get; set; }
     public string Title { get; set; }
     public string? Description { get; set; }
-    public string PathImg { get; set; }
+    public string? PathImg { get; set; }
     public int Rating { get; set; }
     public DateTime PublishDate { get; set; }
-    public int BookStatus { get; set; }
+    public bool BookinLibrary { get; set; }
 }

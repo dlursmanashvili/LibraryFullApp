@@ -83,7 +83,7 @@ public class BookRepository : BaseRepository, IBookRepository
             var result = await GetByIdAsync(model.Id);
             if (result.IsNull() || result.IsDeleted == true) return new CommandExecutionResult { Success = false, ErrorMessage = "record not found" };
 
-            result.BookStatus = model.BookStatus;
+            result.BookinLibrary = model.BookinLibrary;
             result.Title = model.Title;
             result.Description = model.Description;
             result.PublishDate = model.PublishDate;

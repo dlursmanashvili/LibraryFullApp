@@ -1,7 +1,7 @@
 ﻿
 namespace Interface
 {
-    struct UserGroups
+   public struct UserGroups
     {
         public const string External = "USER";
         public const string Admin = "ROOTADMIN";

@@ -24,7 +24,7 @@ public class GetbookDetalisbyNameQuery : Query<List<GetbookDetalisQueryResultIte
                                     PathImg = b.PathImg,
                                     Rating = b.Rating,
                                     PublishDate = b.PublishDate,
-                                    BookStatus = b.BookStatus,
+                                    BookinLibrary = b.BookinLibrary,
                                     AuthorDetails = (from ba in _appContext.BookAuthors
                                                      join author in _appContext.Authors on ba.AuthorId equals author.Id
                                                      where ba.BookId == b.Id && ba.IsDeleted == false && author.IsDeleted == false
@@ -46,10 +46,10 @@ public class GetbookDetalisQueryResultItem
     public int Id { get; set; }
     public string Title { get; set; }
     public string? Description { get; set; }
-    public string PathImg { get; set; }
+    public string? PathImg { get; set; }
     public int Rating { get; set; }
     public DateTime PublishDate { get; set; }
-    public int BookStatus { get; set; }
+    public bool BookinLibrary { get; set; }
     public List<AuthorDelatisQueryResulItem>? AuthorDetails { get; set; }
 }
 public class AuthorDelatisQueryResulItem
