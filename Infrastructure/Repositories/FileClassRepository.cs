@@ -52,10 +52,7 @@ namespace Infrastructure.Repositories
             try
             {
                 // Construct full folder path
-                string fullFolderPath = Path.Combine(
-                    new DirectoryInfo(Path.Combine(_hostingEnvironment.ContentRootPath, hostingEnvironmentPath))?.FullName
-                    ?? throw new Exception("_hostingEnvironment full name is null"),
-                    folderName);
+                string fullFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
 
                 if (ext.Contains('.'))
                 {
@@ -82,7 +79,7 @@ namespace Infrastructure.Repositories
                 byte[] fileBytes = Convert.FromBase64String(base64String);
                 await File.WriteAllBytesAsync(filePath, fileBytes);
 
-                return (new CommandExecutionResult { Success = true }, filePath);
+                return (new CommandExecutionResult { Success = true }, $"{fileName}_{generatedName}.{ext}");
             }
             catch (Exception ex)
             {

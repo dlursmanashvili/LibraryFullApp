@@ -38,7 +38,7 @@
                 <td>@Html.DisplayFor(modelItem => item.Id)</td>
                 <td>@Html.DisplayFor(modelItem => item.Description)</td>
                 <td>
-                    <img src="@item.PathImg" alt="Book Image" style="width:100px; height:auto;" />
+                    <img src="@Url.Content("~/uploads/"+@item.PathImg)" alt="Book Image" style="width:100px; height:auto;" />
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.Rating)</td>
                 <td>@Html.DisplayFor(modelItem => item.PublishDate)</td>
