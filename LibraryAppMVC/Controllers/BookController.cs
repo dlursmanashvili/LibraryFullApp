@@ -24,6 +24,7 @@ namespace LibraryAppMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(EditBookCommand command)
         {
+          
             try
             {
                 var result = await _commandExecutor.Execute(command);
@@ -79,9 +80,9 @@ namespace LibraryAppMVC.Controllers
 
         // GET: book/index
         [HttpGet("index")]
-        public async Task<ActionResult> IndexAsync()
+        public async Task<ActionResult> IndexAsync(string? title)
         {
-            var query = new GetAllBookQuery();
+            var query = new GetAllBookQuery { Title = title };
             var result = await _queryExecutor.Execute<GetAllBookQuery, List<GetBookQueryResultItem>?>(query);
 
             if (result.Success)

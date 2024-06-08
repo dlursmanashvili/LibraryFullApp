@@ -1,15 +1,19 @@
 ﻿using Application.Queries.AutrhorQueries;
 using Application.Shared;
+using Microsoft.IdentityModel.Tokens;
 using Shared;
+using System.Xml.Linq;
 
 namespace Application.Queries.BookQueries;
 
 public class GetAllBookQuery : Query<List<GetBookQueryResultItem>?>
 {
+    public string? Title { get; set; }
+
     public override async Task<QueryExecutionResult<List<GetBookQueryResultItem>?>> Execute()
     {
-        var result = _appContext.Books.Where(x => x.IsDeleted == false).AsQueryable();
 
+        var result = Title.IsNullOrEmpty() ? _appContext.Books.Where(x => x.IsDeleted == false).AsQueryable() : _appContext.Books.Where(x => x.IsDeleted == false && x.Title.Contains(Title)).AsQueryable();
         if (result.IsNotNull())
         {
             return await Ok(result.Select(x => new GetBookQueryResultItem

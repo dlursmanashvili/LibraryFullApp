@@ -21,10 +21,11 @@ namespace LibraryAppMVC.Controllers
         }
         // GET: AuthorController
         [HttpGet("index")]
-        public async Task<ActionResult> IndexAsync()
+        public async Task<ActionResult> IndexAsync(string? name)
         {
-            var query = new GetAllAutrhorQuery();
-            var result = await _queryExecutor.Execute<GetAllAutrhorQuery, List<GetAuthorQueryResultItem>?>(query);
+            var query = new GetAllAuthorByNameQuery { Name = name };
+            var result = await _queryExecutor.Execute<GetAllAuthorByNameQuery, List<GetAuthorQueryResultItem>?>(query);
+
 
             if (result.Success)
             {

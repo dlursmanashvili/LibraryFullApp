@@ -25,14 +25,14 @@ namespace LibraryAppMVC.Controllers
 
         public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Book");
-            }
-            else
-            {
+            //if (User.Identity.IsAuthenticated)
+            //{
+            //    return RedirectToAction("Index", "Book");
+            //}
+            //else
+            //{
                 return RedirectToAction("Login", "User");
-            }
+            //}
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

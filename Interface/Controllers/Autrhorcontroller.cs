@@ -44,6 +44,11 @@ public class Autrhorcontroller : ControllerBase
     public async Task<QueryExecutionResult<List<GetAuthorQueryResultItem>?>> GetAllAuthor([FromQuery] GetAllAutrhorQuery query) =>
          await _queryExecutor.Execute<GetAllAutrhorQuery, List<GetAuthorQueryResultItem>?>(query);
 
+    [AuthoriseHelper(UserGroups.All)]
+    [Route("GetAllAuthorByName")]
+    [HttpGet]
+    public async Task<QueryExecutionResult<List<GetAuthorQueryResultItem>?>> GetAllAuthorByName([FromQuery] GetAllAuthorByNameQuery query) =>
+         await _queryExecutor.Execute<GetAllAuthorByNameQuery, List<GetAuthorQueryResultItem>?>(query);
 
     [AuthoriseHelper(UserGroups.All)]
     [Route("GetAuthorByID")]
