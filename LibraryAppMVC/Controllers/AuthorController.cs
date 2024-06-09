@@ -1,11 +1,9 @@
-﻿using Application.Commands.AuthorCommands;
-using Application.Commands.AutrhorCommands;
+﻿using Application.Commands.AutrhorCommands;
 using Application.Queries.AutrhorQueries;
 using Application.Queries.BookQueries;
 using Application.Shared;
 using LibraryAppMVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace LibraryAppMVC.Controllers
 {
@@ -59,7 +57,7 @@ namespace LibraryAppMVC.Controllers
                         PublishDate = x.PublishDate,
                         BookinLibrary = x.BookinLibrary,
                     }).ToList()
-                };              
+                };
 
                 return View(viewModel);
             }

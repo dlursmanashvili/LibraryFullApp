@@ -45,7 +45,7 @@ public class BookAuthorRepository : BaseRepository, IBookAuthorRepository
     {
         try
         {
-            var BookAuthor = await GetByIdAsync(id);
+            var BookAuthor = await _ApplicationDbContext.BookAuthors.FirstOrDefaultAsync(x => x.Id == id);
             if (BookAuthor.IsNull() || BookAuthor.IsDeleted == true) return new CommandExecutionResult { Success = false, ErrorMessage = "record not found" };
 
             if (BookAuthor != null)

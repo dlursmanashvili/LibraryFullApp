@@ -3,20 +3,30 @@ using Shared;
 
 namespace Application.Commands.BookAuthorcommands
 {
-    public class AddBookAuthorcommand : Command
+    public class AddBookAuthorCommand : Command
     {
         public int BookId { get; set; }
-        public int AuthorId { get; set; }
+        //public int AuthorId { get; set; }
+        public List<int> AuthorIds { get; set; }
 
         public override async Task<CommandExecutionResult> ExecuteAsync()
         {
-            return await bookAuthorRepository.CreateAsync(new Domain.BookAuthorEntity.BookAuthor()
+            foreach (var authorId in AuthorIds)
             {
-                AuthorId = AuthorId,
-                BookId = BookId,
-                CreatedAt = DateTime.Now,
+             var result =   await bookAuthorRepository.CreateAsync(new Domain.BookAuthorEntity.BookAuthor()
+                {
+                    AuthorId = authorId,
+                    BookId = BookId,
+                    CreatedAt = DateTime.Now,
 
-            });
+                });
+                if (result.Success == false)
+                {
+                    return result;
+                }
+            }
+
+            return new CommandExecutionResult() { Success = true };
         }
     }
 }

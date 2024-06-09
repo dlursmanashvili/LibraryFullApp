@@ -1,11 +1,10 @@
-﻿@model BookDetailsViewModel
+﻿@model LibraryAppMVC.Models.BookDetailsViewModel
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@Model.Title - Book Details</title>
+    <title>@Model.Title - Детали книги</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- You can replace the above link with a local copy of Bootstrap if you have one -->
 </head>
 <body>
     <div class="container">
@@ -13,30 +12,54 @@
 
         <div class="row">
             <div class="col-md-6">
-                <img src="@Model.PathImg" alt="Book Image" class="img-fluid" />
+                <img src="@Model.PathImg" alt="Изображение книги" class="img-fluid" />
             </div>
             <div class="col-md-6">
                 <p><strong>Description:</strong> @Model.Description</p>
                 <p><strong>Rating:</strong> @Model.Rating</p>
-                <p><strong>Publish Date:</strong> @Model.PublishDate</p>
-                <p><strong>Available in Library:</strong> @Model.BookinLibrary</p>
+                <p><strong>Publush Date:</strong> @Model.PublishDate</p>
+                <p><strong>In Library:</strong> @Model.BookinLibrary</p>
             </div>
         </div>
 
-        <h2>Authors</h2>
-        <ul class="list-group">
-            @foreach (var author in Model.AuthorDetails)
-            {
-                <li class="list-group-item">
-                    <strong>@author.FirstName @author.LastName</strong> - @author.BirthDate
-                </li>
-            }
-        </ul>
+        <h2>Author</h2>
+        <form asp-action="DeleteBookAuthor" asp-controller="Book" method="post">
+            <input type="hidden" name="BookId" value="@Model.Id" />
+            <ul class="list-group">
+                @foreach (var author in Model.AuthorDetails)
+                {
+                    <li class="list-group-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="AuthorIds" value="@author.Id">
+                            <label class="form-check-label">
+                                <strong>@author.FirstName @author.LastName</strong> - @author.BirthDate
+                            </label>
+                        </div>
+                    </li>
+                }
+            </ul>
+            <button type="submit" class="btn btn-danger btn-sm mt-2">Remove selected authors</button>
+        </form>
 
-        <!-- Edit button -->
+        <!-- Форма для добавления авторов -->
+        <form asp-action="CreateBookAuthor" asp-controller="Book" method="post">
+            <input type="hidden" name="BookId" value="@Model.Id" />
+            <h2>Select authors to add</h2>
+            <div class="form-group">
+                @foreach (var author in Model.AuthorForDropDown)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="AuthorIds" value="@author.Id">
+                        <label class="form-check-label">@author.FirstName @author.LastName</label>
+                    </div>
+                }
+            </div>
+            <button type="submit" class="btn btn-primary">Add selected authors</button>
+        </form>
+
+        <!-- Кнопки редактирования и удаления -->
         <a href="@Url.Action("Edit", "Book", new { id = Model.Id })" class="btn btn-primary">Edit</a>
         <a href="@Url.Action("Delete", "Book", new { id = Model.Id })" class="btn btn-primary">Delete</a>
-     
     </div>
 </body>
 </html>

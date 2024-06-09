@@ -24,7 +24,7 @@ namespace Interface.Controllers
         [AuthoriseHelper(UserGroups.Admin)]
         [Route("AddNewBookAuthor")]
         [HttpPost]
-        public async Task<CommandExecutionResult> AddNewBookAuthor([FromBody] AddBookAuthorcommand command) =>
+        public async Task<CommandExecutionResult> AddNewBookAuthor([FromBody] AddBookAuthorCommand command) =>
            await _commandExecutor.Execute(command);
 
         [AuthoriseHelper(UserGroups.Admin)]

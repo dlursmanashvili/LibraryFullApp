@@ -11,10 +11,12 @@ public class BookDetailsViewModel
     public DateTime PublishDate { get; set; }
     public bool BookinLibrary { get; set; }
     public List<AuthorDetailsViewModel>? AuthorDetails { get; set; }
+    public List<AuthorDetailsViewModel>? AuthorForDropDown { get; set; }
 }
 
 public class AuthorDetailsViewModel
 {
+    public int? Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime BirthDate { get; set; }

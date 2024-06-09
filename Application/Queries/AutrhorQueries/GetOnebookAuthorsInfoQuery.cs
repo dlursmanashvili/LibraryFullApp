@@ -14,6 +14,19 @@ public class GetOnebookAuthorsInfoQuery : Query<GetbookDetalisQueryResultItem?>
         {
 
 
+            var bookAuthors = (from ba in _appContext.BookAuthors
+                               join author in _appContext.Authors on ba.AuthorId equals author.Id
+                               where ba.BookId == query.Id && ba.IsDeleted == false && author.IsDeleted == false
+                               select new AuthorDelatisQueryResulItem
+                               {
+                                   Id = author.Id,
+                                   FirstName = author.FirstName,
+                                   LastName = author.LastName,
+                                   BirthDate = author.BirthDate
+                               }).ToList();
+
+            var authorBookId = bookAuthors.Select(x => x.Id);
+
             var result = new GetbookDetalisQueryResultItem
             {
                 Id = query.Id,
@@ -23,15 +36,27 @@ public class GetOnebookAuthorsInfoQuery : Query<GetbookDetalisQueryResultItem?>
                 Rating = query.Rating,
                 PublishDate = query.PublishDate,
                 BookinLibrary = query.BookinLibrary,
-                AuthorDetails = (from ba in _appContext.BookAuthors
-                                 join author in _appContext.Authors on ba.AuthorId equals author.Id
-                                 where ba.BookId == query.Id && ba.IsDeleted == false && author.IsDeleted == false
-                                 select new AuthorDelatisQueryResulItem
-                                 {
-                                     FirstName = author.FirstName,
-                                     LastName = author.LastName,
-                                     BirthDate = author.BirthDate
-                                 }).ToList()
+                AuthorDetails = bookAuthors,
+                NoBookAuthor = authorBookId.IsNotNull() ?
+                _appContext.Authors
+                            .Where(x =>x.IsDeleted == false && !authorBookId.Contains(x.Id))
+                            .Select(author => new AuthorDelatisQueryResulItem()
+                            {
+                                Id = author.Id,
+                                FirstName = author.FirstName,
+                                LastName = author.LastName,
+                                BirthDate = author.BirthDate
+                            }).ToList() :
+                             _appContext.Authors
+                                        .Where(x => x.IsDeleted == false)
+                                        .Select(author => new AuthorDelatisQueryResulItem()
+                                        {
+                                            Id = author.Id,
+                                            FirstName = author.FirstName,
+                                            LastName = author.LastName,
+                                            BirthDate = author.BirthDate
+                                        }).ToList()
+                            ,
             };
             return await Ok(result);
         }

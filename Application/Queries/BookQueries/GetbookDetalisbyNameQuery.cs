@@ -33,7 +33,8 @@ public class GetbookDetalisbyNameQuery : Query<List<GetbookDetalisQueryResultIte
                                                          FirstName = author.FirstName,
                                                          LastName = author.LastName,
                                                          BirthDate = author.BirthDate
-                                                     }).ToList()
+                                                     }).ToList(),
+
                                 }).ToListAsync();
 
         }
@@ -51,9 +52,11 @@ public class GetbookDetalisQueryResultItem
     public DateTime PublishDate { get; set; }
     public bool BookinLibrary { get; set; }
     public List<AuthorDelatisQueryResulItem>? AuthorDetails { get; set; }
+    public List<AuthorDelatisQueryResulItem>? NoBookAuthor { get; set; }
 }
 public class AuthorDelatisQueryResulItem
 {
+    public int? Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime BirthDate { get; set; }
