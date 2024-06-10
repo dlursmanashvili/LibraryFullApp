@@ -32,6 +32,22 @@ public class AuthorRepository : BaseRepository, IAuthorRepository
             var author = await GetByIdAsync(id);
             if (author.IsNull() || author.IsDeleted == true) return new CommandExecutionResult { Success = false, ErrorMessage = "record not found" };
 
+            if (_ApplicationDbContext.BookAuthors.Any(x => x.Id == id && x.IsDeleted == false))
+            {
+                var bookId = (from ba in _ApplicationDbContext.BookAuthors
+                              join book in _ApplicationDbContext.Books on ba.Id equals book.Id
+                              where book.IsDeleted == false && ba.IsDeleted == false && ba.AuthorId == author.Id
+                              select book.Id).ToList();
+
+                return new CommandExecutionResult
+                {
+                    Success = false,
+                    ErrorMessage = $"ავტორის წაშლა ამ ეტაპზე შეუზლებელია აღნიშნული ავტორი აირს  " +
+                    $"წიგნების ავტორი წიგნების id-ებია :{string.Join(", ", bookId)}. გთხოვთ სუშალოთ აღნიშნულ წიგნებს ავტორები "
+                };
+
+
+            }
             if (author != null)
             {
                 author.IsDeleted = true;

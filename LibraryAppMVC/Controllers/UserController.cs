@@ -65,6 +65,7 @@ namespace LibraryAppMVC.Controllers
             }
 
             var loginResult = await _queryExecutor.Execute<LoginQuery, LoginQueryResult>(query);
+            var x = User;
 
             if (loginResult.Success)
             {
